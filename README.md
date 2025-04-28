@@ -1,4 +1,4 @@
 # Scanner
-Detects QR in a whatsapp chat and opens it automatically
+Detects QRs in a whatsapp chat and opens them automatically
 
 DON'T USE IT TO SKIP CLASSES
