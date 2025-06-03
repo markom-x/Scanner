@@ -5,7 +5,9 @@ import matplotlib.pyplot as plt
 
 def load_data(path: str) -> pd.DataFrame:
     """Load biomedical data from a CSV file."""
-    df = pd.read_csv(path)
+    # The dataset from the UCL repository has no header, so we assign
+    # column names on load.
+    df = pd.read_csv(path, header=None, names=["Feature1", "Feature2"])
     return df
 
 
@@ -16,12 +18,12 @@ def show_summary(df: pd.DataFrame) -> None:
 
 
 def plot_data(df: pd.DataFrame, output_path: Path) -> None:
-    """Plot heart rate vs age scatter plot and save it as an image."""
+    """Plot feature scatter plot and save it as an image."""
     plt.figure(figsize=(8, 6))
-    plt.scatter(df["Age"], df["HeartRate"], c="blue")
-    plt.title("Heart Rate vs Age")
-    plt.xlabel("Age")
-    plt.ylabel("Heart Rate")
+    plt.scatter(df["Feature1"], df["Feature2"], c="blue")
+    plt.title("Feature2 vs Feature1")
+    plt.xlabel("Feature1")
+    plt.ylabel("Feature2")
     plt.grid(True)
     plt.tight_layout()
     plt.savefig(output_path)
@@ -30,10 +32,10 @@ def plot_data(df: pd.DataFrame, output_path: Path) -> None:
 
 def main():
     base_dir = Path(__file__).resolve().parent
-    data_path = base_dir / "data" / "sample_biomed.csv"
+    data_path = base_dir / "data" / "ucl_samples.csv"
     df = load_data(data_path)
     show_summary(df)
-    output_plot = base_dir / "heart_rate_vs_age.png"
+    output_plot = base_dir / "feature_scatter.png"
     plot_data(df, output_plot)
 
 
