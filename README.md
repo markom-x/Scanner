@@ -18,4 +18,3 @@ Run the analysis script:
 python biomed/analyze.py
 ```
 
-The script loads sample data from `biomed/data/sample_biomed.csv`, prints summary statistics, and displays a scatter plot of heart rate versus age.
