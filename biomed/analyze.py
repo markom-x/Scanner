@@ -7,6 +7,9 @@ def load_data(path: str) -> pd.DataFrame:
     """Load heart disease data from a CSV file."""
     df = pd.read_csv(path, na_values="?", skipinitialspace=True)
     df.columns = df.columns.str.strip()
+    """Load biomedical data from a CSV file."""
+    df = pd.read_csv(path)
+
     return df
 
 
@@ -32,6 +35,12 @@ def plot_data(df: pd.DataFrame, output_path: Path) -> None:
     plt.ylabel("Cholesterol")
     cbar = plt.colorbar(scatter)
     cbar.set_label("Diagnosis")
+    """Plot heart rate vs age scatter plot and save it as an image."""
+    plt.figure(figsize=(8, 6))
+    plt.scatter(df["Age"], df["HeartRate"], c="blue")
+    plt.title("Heart Rate vs Age")
+    plt.xlabel("Age")
+    plt.ylabel("Heart Rate")
     plt.grid(True)
     plt.tight_layout()
     plt.savefig(output_path)
@@ -44,6 +53,10 @@ def main():
     df = load_data(data_path)
     show_summary(df)
     output_plot = base_dir / "chol_vs_age.png"
+    data_path = base_dir / "data" / "sample_biomed.csv"
+    df = load_data(data_path)
+    show_summary(df)
+    output_plot = base_dir / "heart_rate_vs_age.png"
     plot_data(df, output_plot)
 
 
